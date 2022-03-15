@@ -25,13 +25,12 @@ void decrement() {
 
 void * updates(void * arg) {
 	// pthread_mutex_lock(&lock);
-
 	for (int i = 0; i < LIMIT; i++) {
 		// counter = counter + 1;
 		increment();
 	}
-
 	// pthread_mutex_unlock(&lock);
+	pthread_exit(NULL);
 }
 
 int main(int argc, char ** argv) {
