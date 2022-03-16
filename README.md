@@ -1,6 +1,6 @@
 # OS_Homeworks - Concurrency
 
-# Information:
+# Information
 
 Student | Student ID
 --------|-----------
