@@ -17,7 +17,7 @@ Nguyễn Thanh Tùng | 2014999
 
 Chapter | Report | Demo
 --------|--------|-------
-Threads Intro | ...
+Threads Intro | [Threads Intro Report](https://drive.google.com/file/d/1W9JPpIliR3DNC6yR-Glof2-uVrTKxxT8/view?usp=sharing)
 Thread API | [Threads-api Report](https://github.com/quockhanhdao/OS_Homeworks/files/8262220/Q.A.md) | [Demo threads-api](https://drive.google.com/file/d/1wiBHZycks-uYEb_Dc_LZm_Pel9C1hyB2/view?usp=sharing)
 Locks | ...
 Lock Usage | [Lock Usage.pdf](https://drive.google.com/file/d/1F5KBa7jaGBr3E5MpWRxDe7VuAUi5-U-T/view?usp=sharing)
