@@ -79,19 +79,21 @@ static void LList_Print(list_t *l_list)
 
 static void LList_Free(list_t *l_list)
 {
-    node_t *curr = l_list->head;
-    if (!curr)
+    if (!l_list->head)
         return;
-    pthread_mutex_lock(&curr->lock);
-    while (curr)
+    node_t *tempNode = NULL;
+    pthread_mutex_lock(&l_list->head->lock);
+    while (l_list->head)
     {
-        node_t *tempNode = curr;
-        curr = curr->next;
-        if (curr)
-            pthread_mutex_lock(&curr->lock);
+        tempNode = l_list->head;
+        l_list->head = l_list->head->next;
+        if (l_list->head)
+            pthread_mutex_lock(&l_list->head->lock);
         pthread_mutex_unlock(&tempNode->lock);
+        pthread_mutex_destroy(&tempNode->lock);
         free(tempNode);
     }
+    pthread_mutex_destroy(&l_list->insert_lock);
     free(l_list);
 }
 
