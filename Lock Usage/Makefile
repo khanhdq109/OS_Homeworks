@@ -18,7 +18,7 @@ Q5: Q5.c
 Q6: Q6.c
 	gcc -g3 -pthread Q6.c -o Q6
 Q4_debug: Q4
-	valgrind $(THREAD_TOOL_ARGS) ./Q4 10 4 1
+	valgrind $(THREAD_TOOL_ARGS) ./Q4 8 0
 Q5_debug: Q5
 	valgrind $(THREAD_TOOL_ARGS) ./Q5
 Q6_debug: Q6
