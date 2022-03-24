@@ -1,6 +1,6 @@
 # OS_Homeworks - Concurrency
 
-# Information
+## Information
 
 Student | Student ID
 --------|-----------
@@ -12,8 +12,9 @@ Nguyễn Hữu Khang | 2011365
 Đinh Công Thành | 2014487
 Nguyễn Tuấn Quyến | 2014311
 Nguyễn Thanh Tùng | 2014999
+Hạ Lê Quốc Thái | 2010612
 
-# Task
+## Task
 
 Chapter | Report | Demo
 --------|--------|-------
@@ -24,4 +25,4 @@ Lock Usage | [Lock Usage](https://drive.google.com/file/d/1F5KBa7jaGBr3E5MpWRxDe
 Condition Variables | [Condition Variables](https://drive.google.com/file/d/16G1cmWuHRY4IbEgZjZdj4oK0-O2XlkLM/view?usp=sharing) | ...
 Semaphores | [Semaphores](https://drive.google.com/file/d/1WPTzO01v8-koZyy_fN7PsxmIeJTPuQq2/view?usp=sharing) | ...
 Concurrency Bugs | [Concurrency Bugs](https://drive.google.com/file/d/1VueB27IB3HBx0xmrto-CwqAnQMb2zFjP/view?usp=sharing) | ...
-Event-based Concurrency	| ... | ...
+Event-based Concurrency | ... | ...
