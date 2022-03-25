@@ -55,6 +55,8 @@ static int push(maxheap_arr_t *heap_obj, int val) {
     return 1;
 }
 
+// Comment it to reduce executable file size
+/*
 static void pop(maxheap_arr_t *heap_obj) {
     pthread_mutex_lock(&heap_obj->lock);
     if (heap_obj->size <= 1) {
@@ -99,6 +101,7 @@ static int top(maxheap_arr_t *heap_obj, int *ans) {
     pthread_mutex_unlock(&heap_obj->lock);
     return 1;
 }
+*/
 
 static int destroy_max_heap(maxheap_arr_t *heap_obj) {
     if (heap_obj->arr == NULL)
