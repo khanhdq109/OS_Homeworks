@@ -1,42 +1,37 @@
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-#include <pthread.h>
 
 #define ONE_MILLION 1000000
 #define MAXHEAP_SIZE 16
 #define MAX_THREAD 8
 
-typedef struct __elem_heap_t
-{
+typedef struct __elem_heap_t {
     int value;
     pthread_mutex_t lock;
 } elem_heap_t;
 
-typedef struct __maxheap_arr_t
-{
+typedef struct __maxheap_arr_t {
     elem_heap_t *arr;
     int size;
     int capacity;
     pthread_mutex_t lock;
 } maxheap_arr_t;
 
-typedef struct __myarg_t
-{
+typedef struct __myarg_t {
     int *start;
     int *end;
 } myarg_t;
 
 static maxheap_arr_t heap_obj;
 
-static int init_max_heap(maxheap_arr_t *heap_obj, unsigned int init_capacity)
-{
+static int init_max_heap(maxheap_arr_t *heap_obj, unsigned int init_capacity) {
     if (init_capacity <= 0)
         return 0;
     heap_obj->arr = malloc(sizeof *(heap_obj->arr) * init_capacity);
-    for (int i = 0; i < heap_obj->capacity; i++)
-    {
+    for (int i = 0; i < heap_obj->capacity; i++) {
         heap_obj->arr[i].value = 0;
         pthread_mutex_init(&heap_obj->arr[i].lock, NULL);
     }
@@ -46,27 +41,24 @@ static int init_max_heap(maxheap_arr_t *heap_obj, unsigned int init_capacity)
     return 1;
 }
 
-static int push(maxheap_arr_t *heap_obj, int val)
-{
+static int push(maxheap_arr_t *heap_obj, int val) {
     pthread_mutex_lock(&heap_obj->lock);
-    if (heap_obj->size == heap_obj->capacity)
-    {
+    if (heap_obj->size == heap_obj->capacity) {
         pthread_mutex_unlock(&heap_obj->lock);
         return 0;
     }
     int tmp, i = heap_obj->size;
     pthread_mutex_lock(&heap_obj->arr[i].lock);
     heap_obj->arr[i].value = val;
-    if (++heap_obj->size == 1)
-    {
+    if (++heap_obj->size == 1) {
         pthread_mutex_unlock(&heap_obj->arr[i].lock);
         pthread_mutex_unlock(&heap_obj->lock);
         return 1;
     }
     pthread_mutex_unlock(&heap_obj->lock);
     pthread_mutex_lock(&heap_obj->arr[(int)((i - 1) / 2)].lock);
-    while (i != 0 && heap_obj->arr[(int)((i - 1) / 2)].value < heap_obj->arr[i].value)
-    {
+    while (i != 0 &&
+           heap_obj->arr[(int)((i - 1) / 2)].value < heap_obj->arr[i].value) {
         tmp = heap_obj->arr[i].value;
         heap_obj->arr[i].value = heap_obj->arr[(int)((i - 1) / 2)].value;
         heap_obj->arr[(int)((i - 1) / 2)].value = tmp;
@@ -81,8 +73,75 @@ static int push(maxheap_arr_t *heap_obj, int val)
     return 1;
 }
 
-static int destroy_max_heap(maxheap_arr_t *heap_obj)
-{
+static void pop(maxheap_arr_t *heap_obj) {
+    pthread_mutex_lock(&heap_obj->lock);
+    if (heap_obj->size <= 1) {
+        heap_obj->size = 0;
+        pthread_mutex_unlock(&heap_obj->lock);
+        return;
+    }
+    int tmp;
+    int left, right, max, parent_node = 0;
+    int local_heap_size = heap_obj->size;
+    pthread_mutex_lock(&heap_obj->arr[0].lock);
+    heap_obj->arr[0] = heap_obj->arr[--heap_obj->size];
+    pthread_mutex_unlock(&heap_obj->lock);
+    while (1) {
+        left = 2 * parent_node + 1;
+        right = 2 * parent_node + 2;
+        if (left >= local_heap_size || left < 0)
+            left = -1;
+        if (right >= local_heap_size || right < 0)
+            right = -1;
+        if (left != -1) {
+            pthread_mutex_lock(&heap_obj->arr[left].lock);
+            if (heap_obj->arr[left].value > heap_obj->arr[parent_node].value)
+                max = left;
+            else {
+                pthread_mutex_unlock(&heap_obj->arr[left].lock);
+                max = parent_node;
+            }
+        } else
+            max = parent_node;
+        if (right != -1) {
+            pthread_mutex_lock(&heap_obj->arr[right].lock);
+            if (heap_obj->arr[right].value > heap_obj->arr[max].value) {
+                if (max == left)
+                    pthread_mutex_unlock(&heap_obj->arr[left].lock);
+                max = right;
+            } else
+                pthread_mutex_unlock(&heap_obj->arr[right].lock);
+        }
+        if (max != parent_node) {
+            tmp = heap_obj->arr[max].value;
+            heap_obj->arr[max].value = heap_obj->arr[parent_node].value;
+            heap_obj->arr[parent_node].value = tmp;
+            pthread_mutex_unlock(&heap_obj->arr[parent_node].lock);
+            parent_node = max;
+        } else
+            break;
+    }
+    pthread_mutex_unlock(&heap_obj->arr[parent_node].lock);
+}
+
+static int top(maxheap_arr_t *heap_obj, int *ans) {
+    // Must acquire all locks to make sure return value is maximum value in
+    // array-based max heap.
+    pthread_mutex_lock(&heap_obj->lock);
+    if (heap_obj->size == 0) {
+        pthread_mutex_unlock(&heap_obj->lock);
+        return 0;
+    }
+    for (int i = 0; i < heap_obj->capacity; i++)
+        pthread_mutex_lock(&heap_obj->arr[i].lock);
+    *ans = heap_obj->arr[0].value;
+    for (int i = 0; i < heap_obj->capacity; i++)
+        pthread_mutex_unlock(&heap_obj->arr[i].lock);
+    pthread_mutex_unlock(&heap_obj->lock);
+    return 1;
+}
+
+static int destroy_max_heap(maxheap_arr_t *heap_obj) {
     if (heap_obj->arr == NULL)
         return 0;
     for (int i = 0; i < heap_obj->capacity; i++)
@@ -96,24 +155,21 @@ static int destroy_max_heap(maxheap_arr_t *heap_obj)
     return 1;
 }
 
-static void *thread_function(void *args)
-{
+static void *thread_function(void *args) {
     myarg_t *m = (myarg_t *)args;
     for (int *i = m->start; i < m->end; i += 1)
         push(&heap_obj, *i);
     pthread_exit(EXIT_SUCCESS);
 }
 
-int main(int argc, char *argv[])
-{
-    int num_arr[MAXHEAP_SIZE] = {31, 36, 42, 51, 34, 43, 65, 16, 2, 6, 98, 81, 80, 29, 45, 66};
+int main(int argc, char *argv[]) {
+    int num_arr[MAXHEAP_SIZE] = {31, 36, 42, 51, 34, 43, 65, 16,
+                                 2,  6,  98, 81, 80, 29, 45, 66};
     init_max_heap(&heap_obj, MAXHEAP_SIZE);
-    for (int i = 1; i <= MAX_THREAD; i += 1)
-    {
+    for (int i = 1; i <= MAX_THREAD; i += 1) {
         myarg_t *args = malloc((size_t)i * sizeof(myarg_t));
         int j;
-        for (j = 0; j < i; j++)
-        {
+        for (j = 0; j < i; j++) {
             args[j].start = &num_arr[(int)(j * MAXHEAP_SIZE / i)];
             args[j].end = &num_arr[(int)((j + 1) * MAXHEAP_SIZE / i)];
         }
@@ -138,8 +194,7 @@ int main(int argc, char *argv[])
         // Calculate execution time
         start_usec = start.tv_sec * ONE_MILLION + start.tv_usec;
         end_usec = end.tv_sec * ONE_MILLION + end.tv_usec;
-        for (j = 0; j < heap_obj.size; j++)
-        {
+        for (j = 0; j < heap_obj.size; j++) {
             printf("%d", heap_obj.arr[j].value);
             if ((j + 1) != heap_obj.size)
                 printf(" ");
