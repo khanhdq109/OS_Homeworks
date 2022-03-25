@@ -18,7 +18,7 @@ Hạ Lê Quốc Thái | 2010612
 
 Chapter | Report | Demo
 --------|--------|-------
-Threads Intro | [Threads Intro](https://drive.google.com/file/d/1W9JPpIliR3DNC6yR-Glof2-uVrTKxxT8/view?usp=sharing) | ...
+Threads Intro | [Threads Intro](https://drive.google.com/file/d/14zz_rek5jsBFqRO5GUWkW2b4Dng8mERj/view?usp=sharing) | [Threads Intro.mp4](https://drive.google.com/file/d/14zz_rek5jsBFqRO5GUWkW2b4Dng8mERj/view?usp=sharing)
 Thread API | [Thread API](https://github.com/quockhanhdao/OS_Homeworks/files/8262220/Q.A.md) | [Thread API.mp4](https://drive.google.com/file/d/1wiBHZycks-uYEb_Dc_LZm_Pel9C1hyB2/view?usp=sharing)
 Locks | [Locks](https://drive.google.com/file/d/1Y8SPXnEuBjmTbgmNAkJ5Eb_GlG2F6vzo/view?usp=sharing) | [Locks.mp4](https://drive.google.com/file/d/1IwlJNFoMS3705ufifeeVkHN7Ucy0Nn5X/view?usp=sharing)
 Lock Usage | [Lock Usage](https://drive.google.com/file/d/1F5KBa7jaGBr3E5MpWRxDe7VuAUi5-U-T/view?usp=sharing) | [Lock Usage.mp4](https://drive.google.com/file/d/1_o3WoZMXLxztINDHlMABT0inujdVEmft/view?usp=sharing)
