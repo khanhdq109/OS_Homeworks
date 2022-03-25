@@ -73,6 +73,74 @@ static int push(maxheap_arr_t *heap_obj, int val) {
     return 1;
 }
 
+static void pop(maxheap_arr_t *heap_obj) {
+    pthread_mutex_lock(&heap_obj->lock);
+    if (heap_obj->size <= 1) {
+        heap_obj->size = 0;
+        pthread_mutex_unlock(&heap_obj->lock);
+        return;
+    }
+    int tmp;
+    int left, right, max, parent_node = 0;
+    int local_heap_size = heap_obj->size;
+    pthread_mutex_lock(&heap_obj->arr[0].lock);
+    heap_obj->arr[0] = heap_obj->arr[--heap_obj->size];
+    pthread_mutex_unlock(&heap_obj->lock);
+    while (1) {
+        left = 2 * parent_node + 1;
+        right = 2 * parent_node + 2;
+        if (left >= local_heap_size || left < 0)
+            left = -1;
+        if (right >= local_heap_size || right < 0)
+            right = -1;
+        if (left != -1) {
+            pthread_mutex_lock(&heap_obj->arr[left].lock);
+            if (heap_obj->arr[left].value > heap_obj->arr[parent_node].value)
+                max = left;
+            else {
+                pthread_mutex_unlock(&heap_obj->arr[left].lock);
+                max = parent_node;
+            }
+        } else
+            max = parent_node;
+        if (right != -1) {
+            pthread_mutex_lock(&heap_obj->arr[right].lock);
+            if (heap_obj->arr[right].value > heap_obj->arr[max].value) {
+                if (max == left)
+                    pthread_mutex_unlock(&heap_obj->arr[left].lock);
+                max = right;
+            } else
+                pthread_mutex_unlock(&heap_obj->arr[right].lock);
+        }
+        if (max != parent_node) {
+            tmp = heap_obj->arr[max].value;
+            heap_obj->arr[max].value = heap_obj->arr[parent_node].value;
+            heap_obj->arr[parent_node].value = tmp;
+            pthread_mutex_unlock(&heap_obj->arr[parent_node].lock);
+            parent_node = max;
+        } else
+            break;
+    }
+    pthread_mutex_unlock(&heap_obj->arr[parent_node].lock);
+}
+
+static int top(maxheap_arr_t *heap_obj, int *ans) {
+    // Must acquire all locks to make sure return value is maximum value in
+    // array-based max heap.
+    pthread_mutex_lock(&heap_obj->lock);
+    if (heap_obj->size == 0) {
+        pthread_mutex_unlock(&heap_obj->lock);
+        return 0;
+    }
+    for (int i = 0; i < heap_obj->capacity; i++)
+        pthread_mutex_lock(&heap_obj->arr[i].lock);
+    *ans = heap_obj->arr[0].value;
+    for (int i = 0; i < heap_obj->capacity; i++)
+        pthread_mutex_unlock(&heap_obj->arr[i].lock);
+    pthread_mutex_unlock(&heap_obj->lock);
+    return 1;
+}
+
 static int destroy_max_heap(maxheap_arr_t *heap_obj) {
     if (heap_obj->arr == NULL)
         return 0;
