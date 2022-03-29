@@ -21,7 +21,7 @@ Chapter | Report | Demo
 Threads Intro | [Threads Intro](https://drive.google.com/file/d/14zz_rek5jsBFqRO5GUWkW2b4Dng8mERj/view?usp=sharing) | [Threads Intro.mp4](https://drive.google.com/file/d/1wiBHZycks-uYEb_Dc_LZm_Pel9C1hyB2/view?usp=sharing)
 Thread API | [Thread API](https://drive.google.com/file/d/1_RDakh38W6QkC-DkbAXSrcuikxHRRpza/view?usp=sharing) | [Thread API.mp4](https://drive.google.com/file/d/1wiBHZycks-uYEb_Dc_LZm_Pel9C1hyB2/view?usp=sharing)
 Locks | [Locks](https://drive.google.com/file/d/1Y8SPXnEuBjmTbgmNAkJ5Eb_GlG2F6vzo/view?usp=sharing) | [Locks.mp4](https://drive.google.com/file/d/1IwlJNFoMS3705ufifeeVkHN7Ucy0Nn5X/view?usp=sharing)
-Lock Usage | [Lock Usage](https://drive.google.com/file/d/1MWipR5YUIWpnjDGykkaxfDDXoP_43Lny/view?usp=sharing) | [Lock Usage.mp4](https://drive.google.com/file/d/1_o3WoZMXLxztINDHlMABT0inujdVEmft/view?usp=sharing)
+Lock Usage | [Lock Usage](https://drive.google.com/file/d/1MWipR5YUIWpnjDGykkaxfDDXoP_43Lny/view?usp=sharing) | [Lock Usage.mp4](https://drive.google.com/drive/u/0/folders/14RNFWqHPfEfKAlVdYtXOCS38_s4jPDn7)
 Condition Variables | [Condition Variables](https://drive.google.com/file/d/16G1cmWuHRY4IbEgZjZdj4oK0-O2XlkLM/view?usp=sharing) | [Condition Variables.mp4](https://drive.google.com/file/d/16qBiJzSEK8vLZ43G1aZs1ILD2GGCFH7N/view?usp=sharing)
 Semaphores | [Semaphores](https://drive.google.com/file/d/1qYJsc7s6qIHhgFhCqU-5l1lpErwpiBWU/view?usp=sharing) | [Semaphores.mp4](https://drive.google.com/file/d/1QMllFqCTLXTbt3U4qz9xM0ezGdvylwEx/view?usp=sharing)
 Concurrency Bugs | [Concurrency Bugs](https://drive.google.com/file/d/1VueB27IB3HBx0xmrto-CwqAnQMb2zFjP/view?usp=sharing) | [Concurrency Bugs.mp4](https://drive.google.com/file/d/14zz_rek5jsBFqRO5GUWkW2b4Dng8mERj/view?usp=sharing)
