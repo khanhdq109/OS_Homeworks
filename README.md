@@ -25,4 +25,4 @@ Lock Usage | [Lock Usage](https://drive.google.com/file/d/1MWipR5YUIWpnjDGykkaxf
 Condition Variables | [Condition Variables](https://drive.google.com/file/d/16G1cmWuHRY4IbEgZjZdj4oK0-O2XlkLM/view?usp=sharing) | [Condition Variables.mp4](https://drive.google.com/file/d/16qBiJzSEK8vLZ43G1aZs1ILD2GGCFH7N/view?usp=sharing)
 Semaphores | [Semaphores](https://drive.google.com/file/d/1qYJsc7s6qIHhgFhCqU-5l1lpErwpiBWU/view?usp=sharing) | [Semaphores.mp4](https://drive.google.com/file/d/1QMllFqCTLXTbt3U4qz9xM0ezGdvylwEx/view?usp=sharing)
 Concurrency Bugs | [Concurrency Bugs](https://drive.google.com/file/d/1VueB27IB3HBx0xmrto-CwqAnQMb2zFjP/view?usp=sharing) | [Concurrency Bugs.mp4](https://drive.google.com/file/d/14zz_rek5jsBFqRO5GUWkW2b4Dng8mERj/view?usp=sharing)
-Event-based Concurrency | ... | ...
+Event-based Concurrency | [Event-based Concurrency](https://drive.google.com/file/d/1iZwzXbt6ROleCUL3Lh1tMdKkg8tgXuf4/view?usp=sharing) | [Event-based Concurrency.mp4](https://drive.google.com/file/d/1j952YL3G0F0DcymFYTJctZON5S3KdbFN/view?usp=sharing)
