@@ -2,17 +2,17 @@
 
 ## Information
 
-Student | Student ID
---------|-----------
-Đào Quốc Khánh | 2013452
-Nguyễn Đức Huy | 2013307
-Nguyễn Kim Tiến | 2014721
-Lê Minh Thiên | 2014565
-Nguyễn Hữu Khang | 2011365
-Đinh Công Thành | 2014487
-Nguyễn Tuấn Quyến | 2014311
-Nguyễn Thanh Tùng | 2014999
-Hạ Lê Quốc Thái | 2010612
+Student | Student ID | Task
+--------|----------- | -----------
+Đào Quốc Khánh | 2013452 | Lock Usages
+Nguyễn Đức Huy | 2013307 | Locks
+Nguyễn Kim Tiến | 2014721 | Concurrency Bugs
+Lê Minh Thiên | 2014565 | Threads Intro
+Nguyễn Hữu Khang | 2011365 | Event-based Concurrency
+Đinh Công Thành | 2014487 | Threads-api + Semaphore (5+6)
+Nguyễn Tuấn Quyến | 2014311 | Condition Variables
+Nguyễn Thanh Tùng | 2014999 | Semaphore (1+2+3+4)
+Hạ Lê Quốc Thái | 2010612 | Lock Usages
 
 ## Task
 
